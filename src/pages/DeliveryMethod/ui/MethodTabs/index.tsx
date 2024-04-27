@@ -9,6 +9,7 @@ const MethodTabs = () => {
         initalTabs,
         addresses,
         currentInfo,
+        isLoading,
         handleMethodChange,
         handleAddressChange,
         handleSave,
@@ -22,11 +23,11 @@ const MethodTabs = () => {
                     {initalTabs.map(({ value }, index) => (
                         <li
                             key={value}
-                            onClick={() => handleMethodChange(index)}
                             className={cn(
                                 "w-full relative cursor-default text-primary-black font-medium py-3 px-10 rounded-lg flex items-center justify-center transition-colors duration-200 ease-in-out",
                                 tab !== index && "hover:bg-gray-200/50 cursor-pointer"
                             )}
+                            {...(!isLoading && { onClick: () => handleMethodChange(index) })}
                         >
                             {tab === index && (
                                 <motion.span

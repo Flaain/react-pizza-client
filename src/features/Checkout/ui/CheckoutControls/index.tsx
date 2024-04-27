@@ -1,7 +1,9 @@
+import CheckoutControlsAuthGuard from "../CheckoutControlsAuthGuard";
+
 const CheckoutControls = () => {
     // const [showPromocodeForm, setShowPromocodeForm] = React.useState(false);
 
-    return null;
+    return <CheckoutControlsAuthGuard />;
     // <>
     //     <button
     //         onClick={() => setShowPromocodeForm((prevState) => !prevState)}
@@ -10,7 +12,6 @@ const CheckoutControls = () => {
     //         {showPromocodeForm ? "У меня нет промокода" : "У меня есть промокод"}
     //     </button>
     //     {/* {showPromocodeForm && <PromocodeForm promocodes={promocodes} />} */}
-    //     <CheckoutControlsAuthGuard />
     // </>
 };
 

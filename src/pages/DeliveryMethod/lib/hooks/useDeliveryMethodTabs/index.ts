@@ -20,6 +20,7 @@ export const useDeliveryMethodTabs = () => {
 
     const items = React.useMemo(() => ({ pickup: staticAddresses, delivery: [...userAddresses.values()] }), []);
 
+    const [isLoading, setIsLoading] = React.useState(false);
     const [searchParams, setSearchParams] = useSearchParams();
     const [currentInfo, setCurrentInfo] = React.useState<DeliveryInfo | null>(deliveryInfo);
     const [tab, setTab] = React.useState(() => {
@@ -46,6 +47,8 @@ export const useDeliveryMethodTabs = () => {
         if (!isAuthenticated) return navigate(routerList.AUTH);
 
         try {
+            setIsLoading(true);
+
             const { data: { deliveryInfo } } = await api.user.updateDeliveryInfo({ 
                 token: token as string, 
                 body: JSON.stringify({ 
@@ -59,10 +62,12 @@ export const useDeliveryMethodTabs = () => {
             navigate(routerList.CART.main);
         } catch (error) {
             console.error(error);
+        } finally {
+            setIsLoading(false);
         }
     }, [currentInfo, isAuthenticated, token]);
 
-    const isSaveBtnDisabled = !currentInfo || deliveryInfo?.address.id === currentInfo.address.id || currentInfo.method !== initalTabs[tab].method;
+    const isSaveBtnDisabled = !currentInfo || deliveryInfo?.address.id === currentInfo.address.id || currentInfo.method !== initalTabs[tab].method || isLoading;
 
     return {
         tab,
@@ -71,6 +76,7 @@ export const useDeliveryMethodTabs = () => {
         initalTabs,
         addresses: items[initalTabs[tab].method as keyof typeof items],
         isSaveBtnDisabled,
+        isLoading,
         handleMethodChange,
         handleAddressChange,
         handleSave
