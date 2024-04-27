@@ -1,11 +1,11 @@
-export class Observer {
-    protected subscribers: Array<<T>(data: T) => void>;
+export class Observer<T> {
+    protected subscribers: Array<(data: T) => void>;
 
     constructor() {
         this.subscribers = [];
     }
 
-    subscribe = (subscriber: <T>(data: T) => void) => {
+    subscribe = (subscriber: (data: T) => void) => {
         this.subscribers.push(subscriber);
 
         return () => {
@@ -13,7 +13,7 @@ export class Observer {
         };
     };
 
-    protected notify = <T>(data: T) => {
+    protected notify = (data: T) => {
         this.subscribers.forEach((subscriber) => subscriber(data));
     };
 }

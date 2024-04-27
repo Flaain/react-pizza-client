@@ -4,7 +4,7 @@ import { IExternalToast, IToast } from "./types";
 const DEFAULT_TOAST_DURATION = 3000;
 const MAX_TOASTS = 3;
 
-export class Toast extends Observer {
+export class Toast extends Observer<IToast> {
     private toasts: Array<IToast>;
     private DEFAULT_TOAST_DURATION: number;
     private MAX_TOASTS: number;
