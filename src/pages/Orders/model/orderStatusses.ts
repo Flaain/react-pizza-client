@@ -7,7 +7,7 @@ export const orderStatusses: Record<string, { title: string; bgColor: string }> 
         title: "Ожидает оплаты",
         bgColor: "before:bg-[#FFC700]",
     },
-    CANCELLED: {
+    CANCELED: {
         title: "Отменен",
         bgColor: "before:bg-[#FF0000]",
     },
